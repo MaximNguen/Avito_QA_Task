@@ -32,7 +32,7 @@ class TestCRUD:
             delete_object.action(object_id)
             delete_object.verify_object_deleted(object_id)
 
-    @allure.title("Создаем новое объявление - позитивный тест-кейс №1")
+    @allure.title("Создаем новое объявление - позитивный тест-кейс №1.1")
     def test_create_object(self, api_factory):
         with allure.step("Создаем объявление с помощью Page Object"):
             new_object = api_factory.create_endpoint()
