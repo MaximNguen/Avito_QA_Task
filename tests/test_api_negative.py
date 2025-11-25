@@ -66,7 +66,16 @@ class TestCRUDNegative:
         with allure.step("Достоверимся, что получили ошибку при попытке получить несуществующее объявление"):
             get_object.check_status_code(404)
 
-    @allure.title("Не получаем объявления определенного продавца - негативный тест-кейс №5")
+    @allure.title("Не получаем созданное объявление - негативный тест-кейс №5")
+    def test_get_object_wrong_id(self, api_factory, test_object_id):
+        with allure.step("Указываем некорректный айди объявления"):
+            get_object = api_factory.get_endpoint()
+            get_object.action_wrong_400("obobobo_id_1293128312")
+
+        with allure.step("Достоверимся, что получили ошибку при попытке получить несуществующее объявление"):
+            get_object.check_status_code(400)
+
+    @allure.title("Не получаем объявления определенного продавца - негативный тест-кейс №6")
     def test_get_list_object_wrong(self, api_factory):
         with allure.step("Введем некорректный айди продавца"):
             get_object = api_factory.get_all_endpoint()
@@ -75,7 +84,7 @@ class TestCRUDNegative:
         with allure.step("Достоверимся, что получили Not Found"):
             get_object.check_status_code(400)
 
-    @allure.title("Не получаем статистику объявление - негативный тест-кейс №6")
+    @allure.title("Не получаем статистику объявление - негативный тест-кейс №7")
     def test_get_stats_object_wrong(self, api_factory, test_object_id):
         with allure.step("Указываем неверный"):
             get_object = api_factory.get_stat_endpoint()

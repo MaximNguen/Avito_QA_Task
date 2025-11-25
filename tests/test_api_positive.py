@@ -27,7 +27,7 @@ class TestCRUD:
         create_object = api_factory.create_endpoint()
         object_id = create_object.new_object(Payloads.create_payload)
         yield object_id
-        with allure.step("спешно удаляем объявление"):
+        with allure.step("Успешно удаляем объявление"):
             delete_object = api_factory.delete_endpoint()
             delete_object.action(object_id)
             delete_object.verify_object_deleted(object_id)
