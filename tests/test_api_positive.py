@@ -27,14 +27,16 @@ class TestCRUD:
         create_object = api_factory.create_endpoint()
         object_id = create_object.new_object(Payloads.create_payload)
         yield object_id
-        delete_object = api_factory.delete_endpoint()
-        delete_object.delete_by_id(object_id)
+        with allure.step("спешно удаляем объявление"):
+            delete_object = api_factory.delete_endpoint()
+            delete_object.action(object_id)
+            delete_object.verify_object_deleted(object_id)
 
     @allure.title("Создаем новое объявление - позитивный тест-кейс №1")
     def test_create_object(self, api_factory):
         with allure.step("Создаем объявление с помощью Page Object"):
             new_object = api_factory.create_endpoint()
-            new_object.new_object(Payloads.create_payload)
+            new_object.action(Payloads.create_payload)
 
         with allure.step("Проверяем статус кода"):
             new_object.check_status_code(200)
@@ -43,7 +45,7 @@ class TestCRUD:
     def test_get_object(self, api_factory, test_object_id):
         with allure.step("Получаем айди объявления"):
             get_object =  api_factory.get_endpoint()
-            get_object.get_object_by_id(test_object_id)
+            get_object.action(test_object_id)
 
         with allure.step("Достоверимся, что получили объявление"):
             get_object.check_status_code(200)
@@ -52,7 +54,7 @@ class TestCRUD:
     def test_get_list_object(self, api_factory):
         with allure.step("Получаем айди продавца"):
             get_object = api_factory.get_all_endpoint()
-            get_object.get_objects_by_id(1)
+            get_object.action(1)
 
         with allure.step("Достоверимся, что получили список объявлений"):
             get_object.check_status_code(200)

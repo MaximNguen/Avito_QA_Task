@@ -18,7 +18,6 @@ class DeleteObject(BaseEndpoint):
                 self.response_json = {}
         else:
             self.response_json = {}
-        self.check_status_code(200)
 
     @allure.step("Подтверждаем, что объявление по ID {obj_id} удален")
     def verify_object_deleted(self, obj_id: str) -> None:

@@ -22,5 +22,5 @@ class GetObject(BaseEndpoint):
     def get_object_by_id_wrong(self, obj_id: str = 455746) -> Dict[str, Any]:
         self.response = requests.get(f"{self.base_url}/api/1/item/{obj_id}")
         self.response_json = self.response.json()
-        self.check_status_code(400)
+        self.check_status_code(404)
         return self.response_json

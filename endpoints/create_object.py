@@ -19,10 +19,12 @@ class CreateObject(BaseEndpoint):
     def new_object(self, payload: Dict[str, Any]) -> str:
         self.response = requests.post(f"{self.endpoint_url}", json=payload)
         self.response_json = self.response.json()
+        self.check_status_code(200)
         return self.response_json["status"].split()[3]
 
     @allure.step("Создаем объявление с некорректными данными")
     def new_object_wrong(self, payload: Dict[str, Any]) -> None:
         self.response = requests.post(f"{self.endpoint_url}", json=payload)
         self.response_json = self.response.json()
+        self.check_status_code(400)
         return self.response_json
