@@ -11,7 +11,13 @@ class DeleteObject(BaseEndpoint):
     @allure.step("Удаляем объявление по ID: {obj_id}")
     def delete_by_id(self, obj_id: str) -> None:
         self.response = requests.delete(f"{self.base_url}/api/2/item/{obj_id}")
-        self.response_json = self.response.json()
+        if self.response.content:
+            try:
+                self.response_json = self.response.json()
+            except:
+                self.response_json = {}
+        else:
+            self.response_json = {}
         self.check_status_code(200)
 
     @allure.step("Подтверждаем, что объявление по ID {obj_id} удален")

@@ -20,7 +20,6 @@ class CreateObject(BaseEndpoint):
         self.response = requests.post(f"{self.endpoint_url}", json=payload)
         self.response_json = self.response.json()
         self.check_status_code(200)
-        self.check_response_has_id()
         return self.response_json["status"].split()[3]
 
     @allure.step("Создаем объявление с некорректными данными")

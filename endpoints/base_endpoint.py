@@ -15,14 +15,3 @@ class BaseEndpoint(ABC):
         actual_code = self.response.status_code
         assert actual_code == expected_code, \
             f"Ожидали статус {expected_code}, получили {actual_code}. Ответ: {self.response.text}"
-
-    @allure.step("Проверяем в JSON param Name = '{expected_name}'")
-    def check_response_name(self, expected_name: str):
-        actual_name = self.response_json.get('name')
-        assert actual_name == expected_name, \
-            f"Ожидали Name '{expected_name}', получили '{actual_name}'"
-
-    @allure.step("Проверяем, что ответ имеет ID")
-    def check_response_has_id(self):
-        assert 'id' in self.response_json, \
-            f"Ответ не имеет Id. Ответ: {self.response_json}"

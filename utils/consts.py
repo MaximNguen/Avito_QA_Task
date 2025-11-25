@@ -1,4 +1,4 @@
-from generators import Generator
+from utils.generators import Generator
 
 class Payloads:
     create_payload = {
